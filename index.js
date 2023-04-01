@@ -6,91 +6,143 @@ var startbtn = document.getElementById("startBtn");
 
 // Get the question and answer elements
 const questionElement = document.getElementById("question");
-const answr1 = document.getElementById('answr1').querySelector("span");
-const answr2 = document.getElementById('answr2').querySelector("span");
-const answr3 = document.getElementById('answr3').querySelector("span");
-const answr4 = document.getElementById('answr4').querySelector("span");
+const answerElements= [
+document.getElementById('answr1').querySelector("span"),
+document.getElementById('answr2').querySelector("span"),
+document.getElementById('answr3').querySelector("span"),
+document.getElementById('answr4').querySelector("span"),
+]
+
 
 // Get the next button and heading elements
 const nextBtn = document.getElementById('next1');
-var myH2 = document.getElementsByTagName("h2")[0];
+var questionNumber = document.getElementsByTagName("h2")[0];
 
 // Get all answer choice elements
 const answrchoice = document.querySelectorAll(".answer-choice");
 
 // Define the questions and their respective answers
-const question = ["Which language has the more native speakers?",
- "What is the most common surname in the United States",
- "What year was the United Nations established?",
- "What company was originally called Cadabra?"]
+const questions = [
+    {
+      question: "Which language has the more native speakers?",
+      answers: [
+        { text: "English", correct: false },
+        { text: "Spanish", correct: true },
+        { text: "French", correct: false },
+        { text: "Romanian", correct: false }
+      ]
+    },
+    {
+      question: "What is the most common surname in the United States?",
+      answers: [
+        { text: "Smith", correct: true },
+        { text: "Touri", correct: false },
+        { text: "Mohammed", correct: false },
+        { text: "Khan", correct: false }
+      ]
+    },
+    {
+      question: "What year was the United Nations established?",
+      answers: [
+        { text: "1920", correct: false },
+        { text: "1911", correct: false },
+        { text: "1945", correct: true },
+        { text: "1990", correct: false }
+      ]
+    },
+    {
+      question: "What company was originally called Cadabra?",
+      answers: [
+        { text: "Volkswagen", correct: false },
+        { text: "Amazon", correct: true },
+        { text: "Aliexpress", correct: false },
+        { text: "Zalando", correct: false }
+      ]
+    }
+  ];
+  var i = 0;
  
-const answrQuestions = [["English", "Spanish", "Frensh","Romanian"],
-["Smith", "Trouri","Mohammed","Khan"],
-["1920", "1911","1945","1990"],
-["Volkswagen", "Amazon","Aliexpress","Zalando"],
- ]
-
- // Define the correct answers
- const correctAnswr = ["Spanish", "Smith", "1945","Amazon"]
+  
 
 // Set the initial question and answer choices
 
 // Initialize the question counter
-var i = 0;
+
 
 startbtn.onclick = ()=> {
-    questionElement.textContent = question[0];
-answr1.textContent = answrQuestions[0][0];
-answr2.textContent = answrQuestions[0][1];
-answr3.textContent = answrQuestions[0][2];
-answr4.textContent = answrQuestions[0][3];
-
-myH2.innerHTML = "Question 1";
-console.log("test")
+    setQuesandAnswr();
     form1.style.left= "-750px"
     form2.style.left= "100px"
- 
-
+    i++;
 };
+
+
+function setQuesandAnswr() {
+    questionNumber.innerHTML = "Question "+ (i+1);
+    questionElement.textContent = questions[i].question;
+    questions[i].answers.forEach((answer, i) => {
+    answerElements[i].textContent = answer.text;
+  });
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 nextBtn.addEventListener('click', ()=> {
 
-    // Increment the question counter
-    i++;
-
-    // Check if all questions have been answered
-    if (i >= question.length) {
+    if (i >= questions.length) {
         console.log("Quiz completed!");
         form2.style.left= "-750px"
         form3.style.left= "100px"
         return;
     }
 
-    // Set the next question and answer choices
-    questionElement.textContent = question[i];
-    answr1.textContent = answrQuestions[i][0];
-    answr2.textContent = answrQuestions[i][1];
-    answr3.textContent = answrQuestions[i][2];
-    answr4.textContent = answrQuestions[i][3];
-    myH2.innerHTML = "Question " + (i+1);
-
-    // Add click event listener to each answer choice
+    setQuesandAnswr();
+   
+///*
+    // Check if all questions have been answered
+    i++;
+    //remove the selected answer from answchoice
     answrchoice.forEach((choice) => {
-        choice.addEventListener('click', (event) => {
-            // Set selectedAnswer to the text content of the selected answer choice
-            selectedAnswer = event.target.querySelector('span').textContent;
-            console.log("Selected answer: " + selectedAnswer);
-        });
+        choice.classList.remove('selected');
     });
-
-    // Check if the selected answer is correct
+    /*// Check if the selected answer is correct
     if (selectedAnswer === correctAnswr[i-1]) {
         console.log("Correct! Selected answer: " + selectedAnswer + ", Correct answer: " + correctAnswr[i-1]);
     } else {
         console.log('Incorrect! Selected answer: ' + selectedAnswer + ", Correct answer: " + correctAnswr[i-1]);
-    }
+    }*/
 })
+
+ // Add click event listener to each answer choice
+ answrchoice.forEach((choice) => {
+    choice.addEventListener('click', (event) => {
+
+        answrchoice.forEach((choice) => {
+            choice.classList.remove('selected');
+        });
+
+        event.target.classList.add('selected');
+        // Set selectedAnswer to the text content of the selected answer choice
+        selectedAnswer = event.target.querySelector('span').textContent;
+        console.log("Selected answer: " + selectedAnswer);
+    });
+});
 
 
 console.log("test")
