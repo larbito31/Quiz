@@ -1,6 +1,8 @@
-// Initialize selectedAnswer with an empty string
 var selectedAnswer= "";
-console.log("test")
+var form1 = document.getElementById("form1");
+var form2 = document.getElementById("form2");
+var form3 = document.getElementById("form3");
+var startbtn = document.getElementById("startBtn");
 
 // Get the question and answer elements
 const questionElement = document.getElementById("question");
@@ -17,27 +19,40 @@ var myH2 = document.getElementsByTagName("h2")[0];
 const answrchoice = document.querySelectorAll(".answer-choice");
 
 // Define the questions and their respective answers
-const question = ["what is your ", "who are you","ok just a test?","kaka ronaldo ?"]
-const answrQuestions = [["koko", "dsfsdfs","q1","sidsfsfssi"],
-["koko", "dsfsdfs","q2","sidsfsfssi"],
-["koko", "dsfsdfs","q3","sidsfsfssi"],
-["koko", "dsfsdfs","q4","sidsfsfssi"],
+const question = ["Which language has the more native speakers?",
+ "What is the most common surname in the United States",
+ "What year was the United Nations established?",
+ "What company was originally called Cadabra?"]
+ 
+const answrQuestions = [["English", "Spanish", "Frensh","Romanian"],
+["Smith", "Trouri","Mohammed","Khan"],
+["1920", "1911","1945","1990"],
+["Volkswagen", "Amazon","Aliexpress","Zalando"],
  ]
 
  // Define the correct answers
- const correctAnswr = ["q1", "q2", "q3","q4"]
+ const correctAnswr = ["Spanish", "Smith", "1945","Amazon"]
 
 // Set the initial question and answer choices
-questionElement.textContent = question[0];
+
+// Initialize the question counter
+var i = 0;
+
+startbtn.onclick = ()=> {
+    questionElement.textContent = question[0];
 answr1.textContent = answrQuestions[0][0];
 answr2.textContent = answrQuestions[0][1];
 answr3.textContent = answrQuestions[0][2];
 answr4.textContent = answrQuestions[0][3];
-selectedAnswer = correctAnswr[0];
-myH2.innerHTML = "Question 1";
 
-// Initialize the question counter
-var i = 0;
+myH2.innerHTML = "Question 1";
+console.log("test")
+    form1.style.left= "-750px"
+    form2.style.left= "100px"
+ 
+
+};
+
 
 nextBtn.addEventListener('click', ()=> {
 
@@ -47,6 +62,8 @@ nextBtn.addEventListener('click', ()=> {
     // Check if all questions have been answered
     if (i >= question.length) {
         console.log("Quiz completed!");
+        form2.style.left= "-750px"
+        form3.style.left= "100px"
         return;
     }
 
@@ -75,10 +92,11 @@ nextBtn.addEventListener('click', ()=> {
     }
 })
 
-// Define the quiz class with methods to set questions and answers
-class Quiz {
-    setQuestion(){}
-    setanswers() {}
-}
 
 console.log("test")
+
+
+
+
+
+

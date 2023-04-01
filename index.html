@@ -6,13 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
+    
+
+
     <title>Quiz</title>
     <head>
         <title>My Quiz</title>
       </head>
         <body>
+
           <div class="quiz">
-            <h1>Quiz</h1>
+            <form id="form1">
+              <h3> Welcome to Quiz Game</h3>
+              <button id="startBtn" type="button">Start!</button>
+
+            </form>
+            
+
+            <form id="form2"> 
+            <h1>QuizApp</h1>
               <h2>Question 1:</h2>
               <p id="question"></p>
               <div class="answer-choice" id="answr1">
@@ -29,15 +41,22 @@
                 <span></span>
               </div>
 
-              <button id="next1">Next</button>
+              <button id="next1" type="button">Next</button>
             
-            <div class="results" id="results">
-              <h2>Results:</h2>
-              <p id="score">You scored <span id="correct-answers"></span> out of <span id="total-questions"></span> questions.</p>
+  
+          </form>
+
+          <form id="form3"> 
+            <h1>Results</h1>
+            <p id="score">You scored <span id="correct-answers"></span> out of <span id="total-questions"></span> questions.</p>
               <button id="restart">Restart</button>
-            </div>
+
+
+          </form>
           </div>
           
+
+
         </body>
       </html>
       
