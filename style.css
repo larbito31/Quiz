@@ -84,24 +84,51 @@
   }
   
   .answer-choice:hover {
-    background-color: #f2f2f2;
+    background-color: #7a5d5d;
   }
   
-  .answer-choice.selected {
-    border-color: #22bb33;
-    
-  }
+ 
+  
+
   
   .answer-choice.correct {
     background-color: #22bb33;
     color: #fff;
+    opacity: 1;
   }
   
   .answer-choice.incorrect {
     background-color: #ff4444;
     color: #fff;
   }
+
+  .answer-choice.test {
+    background-color: #000000;
+    color: #994343;
+  }
+
+  .answer-choice[testt="testt"] {
+    background-color: #000000;
+    color: #994343;
+  }
+
+  .answer-choice[disabled="disabled"] {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .answer-choice[enabled="enabled"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .answer-choice.enabled {
+    opacity: 1;
+    pointer-events: auto;
+  }
   
+
+ 
 
   
   .quiz button {
