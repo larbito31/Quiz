@@ -3,6 +3,12 @@ var form1 = document.getElementById("form1");
 var form2 = document.getElementById("form2");
 var form3 = document.getElementById("form3");
 var startbtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById('next1'); // Get the next button and questionNumber element
+nextBtn.style.display='none';
+var questionNumber = document.getElementsByTagName("h2")[0];
+const answrchoice = document.querySelectorAll(".answer-choice"); // Get all answer choice elements
+var scoreDom = document.getElementById("score");
+var score = 0;
 
 // Get the question and answer elements
 const questionElement = document.getElementById("question");
@@ -14,12 +20,8 @@ document.getElementById('answr4').querySelector("span"),
 ]
 
 
-// Get the next button and heading elements
-const nextBtn = document.getElementById('next1');
-var questionNumber = document.getElementsByTagName("h2")[0];
 
-// Get all answer choice elements
-const answrchoice = document.querySelectorAll(".answer-choice");
+
 
 // Define the questions and their respective answers
 const questions = [
@@ -60,7 +62,7 @@ const questions = [
       ]
     }
   ];
-  var i = 0;
+  var currentQuestion  = 0;
  
   
 
@@ -73,79 +75,80 @@ startbtn.onclick = ()=> {
     setQuesandAnswr();
     form1.style.left= "-750px"
     form2.style.left= "100px"
-    i++;
+    //currentQuestion++;
 };
 
 
 function setQuesandAnswr() {
-    questionNumber.innerHTML = "Question "+ (i+1);
-    questionElement.textContent = questions[i].question;
-    questions[i].answers.forEach((answer, i) => {
+    questionNumber.innerHTML = "Question "+ (currentQuestion+1);
+    questionElement.textContent = questions[currentQuestion].question;
+    questions[currentQuestion].answers.forEach((answer, i) => {
     answerElements[i].textContent = answer.text;
+    
+    
   });
-
-
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 nextBtn.addEventListener('click', ()=> {
+    nextBtn.style.display='none'; //hide bottun
 
-    if (i >= questions.length) {
+    if (currentQuestion >= questions.length-1) {
+      scoreDom.innerHTML = ` the score is ${score}`
         console.log("Quiz completed!");
         form2.style.left= "-750px"
         form3.style.left= "100px"
         return;
     }
-
+    currentQuestion++;
     setQuesandAnswr();
-   
-///*
-    // Check if all questions have been answered
-    i++;
+    
     //remove the selected answer from answchoice
     answrchoice.forEach((choice) => {
-        choice.classList.remove('selected');
+      
+        choice.classList.remove('correct');
+        choice.classList.remove('incorrect');
+        choice.removeAttribute('disabled');
+        
+
     });
-    /*// Check if the selected answer is correct
-    if (selectedAnswer === correctAnswr[i-1]) {
-        console.log("Correct! Selected answer: " + selectedAnswer + ", Correct answer: " + correctAnswr[i-1]);
-    } else {
-        console.log('Incorrect! Selected answer: ' + selectedAnswer + ", Correct answer: " + correctAnswr[i-1]);
-    }*/
 })
 
  // Add click event listener to each answer choice
  answrchoice.forEach((choice) => {
+
     choice.addEventListener('click', (event) => {
 
-        answrchoice.forEach((choice) => {
-            choice.classList.remove('selected');
-        });
-
-        event.target.classList.add('selected');
-        // Set selectedAnswer to the text content of the selected answer choice
+        correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
         selectedAnswer = event.target.querySelector('span').textContent;
-        console.log("Selected answer: " + selectedAnswer);
+        console.log("the correct answer is: "+ correctAnswer);
+        console.log("the select answer is: "+ selectedAnswer);
+        const correctChoice = event.target.parentElement.querySelector(`[title="${correctAnswer}"]`);
+        // Check if the selected answer is correct
+        
+        if (selectedAnswer === correctAnswer){
+          score++;
+            answrchoice.forEach((choice) => {
+                choice.setAttribute('disabled','disabled'); 
+                             
+            });
+            event.target.classList.add('correct');
+        } else {
+            event.target.classList.add('incorrect');
+            answrchoice.forEach((choice) => {
+                choice.setAttribute('disabled','disabled'); 
+                
+                
+            });
+        }
+      
+        nextBtn.style.display='block'; 
+            
     });
 });
 
-
-console.log("test")
 
 
 
