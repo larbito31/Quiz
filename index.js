@@ -96,7 +96,7 @@ nextBtn.addEventListener('click', ()=> {
     nextBtn.style.display='none'; //hide bottun
 
     if (currentQuestion >= questions.length-1) {
-      scoreDom.innerHTML = ` the score is ${score}`
+      scoreDom.innerHTML = ` You scored ${(score/4)*100}%`
         console.log("Quiz completed!");
         form2.style.left= "-750px"
         form3.style.left= "100px"
