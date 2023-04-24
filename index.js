@@ -121,7 +121,7 @@ nextBtn.addEventListener('click', ()=> {
 
     choice.addEventListener('click', (event) => {
 
-        correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
+        const correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
         selectedAnswer = event.target.querySelector('span').textContent;
         console.log("the correct answer is: "+ correctAnswer);
         console.log("the select answer is: "+ selectedAnswer);
